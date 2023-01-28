@@ -14,7 +14,6 @@ else
   fi
   echo $FETCH_ELEMENT | while IFS='|' read ATOMIC_NUMBER SYMBOL NAME
   do
-    echo "$ATOMIC_NUMBER $SYMBOL $NAME"
     echo "The element with atomic number $ATOMIC_NUMBER is $HYDROGEN ($SYMBOL). It's a metal with a mass of (1.008) amu. $NAME has a melting point of (-259.1) celsius and a boiling point of (-252.9) celsius."
   done
 fi
