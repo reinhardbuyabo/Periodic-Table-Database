@@ -14,8 +14,10 @@ else
   fi
   echo $FETCH_ELEMENT | while IFS='|' read ATOMIC_NUMBER SYMBOL NAME
   do
-    PROPERTIES=$($PSQL "SELECT * FROM properties WHERE atomic_number=$ATOMIC_NUMBER")
-    echo "$PROPERTIES"
-    echo "The element with atomic number $ATOMIC_NUMBER is $HYDROGEN ($SYMBOL). It's a metal with a mass of (1.008) amu. $NAME has a melting point of (-259.1) celsius and a boiling point of (-252.9) celsius."
+    PROPERTIES=$($PSQL "SELECT atomic_mass, melting_point_celsius, boiling_point_celsius,type FROM properties WHERE atomic_number=$ATOMIC_NUMBER")
+    echo "$PROPERTIES" | while IFS='|' read ATOMIC_MASS MELTING_POINT BOILING_POINT TYPE
+    do
+      echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $ATOMIC_MASS amu. $NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius."
+    done
   done
 fi
